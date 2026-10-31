@@ -70,6 +70,20 @@ main{max-width:560px;margin:0 auto;padding:28px 16px 56px;}
 .invite .place{margin:16px auto 0;display:inline-block;border:1.5px solid #d98a6e;padding:10px 18px;}
 .invite .place .label{display:block;font-family:var(--type);font-size:11px;letter-spacing:.3em;color:#d98a6e;}
 .invite .place .room{display:block;font-family:var(--mincho);font-weight:900;font-size:22px;letter-spacing:.06em;line-height:1.4;margin-top:2px;}
+/* スタッフモード(本編の #staffpanel に合わせた見た目) */
+#staffpanel{position:fixed;inset:0;z-index:50;overflow-y:auto;background:var(--paper-hi);padding:20px 16px 32px;}
+#staffpanel h2{font-size:18px;margin:0 0 4px;color:var(--stamp);}
+#staffpanel h3{font-size:14px;border-bottom:1.5px solid var(--ink);padding-bottom:6px;margin:0 0 10px;}
+#staffpanel section{margin:18px 0 22px;}
+#staffpanel .note{font-size:12px;color:var(--muted);margin:8px 0;line-height:1.6;}
+#staffpanel table{width:100%;border-collapse:collapse;font-size:13px;}
+#staffpanel td,#staffpanel th{border-bottom:1px solid var(--line-soft);padding:6px 4px;text-align:left;}
+#staffpanel pre{font-size:12px;background:var(--paper-2);border:1px solid var(--line-soft);padding:10px;margin:0 0 10px;white-space:pre-wrap;}
+.staff-answer{font-family:var(--mincho);font-weight:900;font-size:26px;letter-spacing:.1em;margin:0;}
+.staff-answer small{font-size:14px;color:var(--muted);margin-left:8px;letter-spacing:0;}
+.staff-row{display:flex;gap:8px;flex-wrap:wrap;}
+.staff-row .btn{flex:1;font-size:14px;padding:10px 8px;white-space:nowrap;}
+.staff-danger{background:var(--stamp);border-color:var(--stamp);}
 footer{text-align:center;font-family:var(--type);font-size:11px;color:var(--muted);letter-spacing:.15em;}
 </style>
 </head>
@@ -222,8 +236,57 @@ footer{text-align:center;font-family:var(--type);font-size:11px;color:var(--mute
     }
   });
 
+  /* ---------- スタッフモード( #staff )。本編と同じく、URLに #staff を付けると開く ---------- */
+  const KANA = [["あ", "か", "さ"], ["た", "な", "は"], ["ま", "や", "ら"], ["゛小", "わ", "、。"]];
+  const OP = { tap: "タップ", up: "上", down: "下", left: "左", right: "右" };
+  const esc = (t) => String(t).replace(/[&<>"]/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[ch]);
+  const renderStaff = () => {
+    const old = document.getElementById("staffpanel");
+    if (old) old.remove();
+    document.body.style.overflow = "";
+    if (location.hash !== "#staff") return;
+    const rows = MOVES.map(([c, r, mv], i) =>
+      `<tr><td>${i + 1}</td><td>${KANA[r][c]}</td><td>${OP[mv]}</td><td>${ANSWERS[0][i]}</td></tr>`).join("");
+    const p = document.createElement("div");
+    p.id = "staffpanel";
+    p.innerHTML = `
+      <h2>STAFFモード</h2>
+      <p class="note">URLに #staff を付けると誰でも入れます(簡易ガード)。参加者には案内しないこと。</p>
+      <section><h3>答え</h3>
+        <p class="staff-answer">${esc(ANSWERS[0])}<small>(探偵求む)</small></p>
+        <p class="note">正解として受け付ける入力：${ANSWERS.map(esc).join(" / ")}。ひらがな・全角半角・空白の違いは吸収する。</p>
+        <table><tr><th>番号</th><th>キー</th><th>操作</th><th>文字</th></tr>${rows}</table>
+        <p class="note">12キーのかな入力。「ン」はわキーの上フリック(iPhone などの配列)。</p>
+      </section>
+      <section><h3>この端末の状態</h3>
+        <pre>${esc(JSON.stringify(state, null, 2))}</pre>
+        <div class="staff-row">
+          <button class="btn" type="button" data-act="solve">解いた状態にする</button>
+          <button class="btn staff-danger" type="button" data-act="reset">最初からにする</button>
+        </div>
+        <p class="note">「最初からにする」は、この端末に保存された解答状態とヒントの表示を消す(展示用の端末を次の人に渡すときなど)。</p>
+      </section>
+      <button class="btn btn-ghost" type="button" data-act="close">STAFFモードを閉じる</button>`;
+    p.addEventListener("click", (e) => {
+      const act = e.target.dataset && e.target.dataset.act;
+      if (act === "solve") {
+        state.solved = true; save(); showSolved(false); renderStaff();
+      } else if (act === "reset" && confirm("この端末の進捗を消して、最初からにします。よろしいですか？")) {
+        try { localStorage.removeItem(KEY); } catch (err) {}
+        location.replace(location.pathname);
+      } else if (act === "close") {
+        history.replaceState(null, "", location.pathname + location.search);
+        renderStaff();
+      }
+    });
+    document.body.appendChild(p);
+    document.body.style.overflow = "hidden";
+  };
+  window.addEventListener("hashchange", renderStaff);
+
   renderHints();
   if (state.solved) showSolved(false);
+  renderStaff();
 })();
 </script>
 </body>

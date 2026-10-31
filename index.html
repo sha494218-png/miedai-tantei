@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>前日談 六つのしるし｜消えた恋人の行方</title>
+<meta name="description" content="三重大学学園祭 周回型リアル脱出ゲーム「消えた恋人の行方 〜幻想のアマント〜」の前日談。届いたのは、六つの図だけのメッセージ。">
+<meta property="og:title" content="前日談 六つのしるし｜消えた恋人の行方">
+<meta property="og:description" content="学園祭の前日、ミエダイ探偵のもとに届いたのは、六つの図だけのメッセージだった。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@700;900&display=swap" rel="stylesheet">
+<style>
+/* 本編(../index.html)の「色あせた手配書」のトークンを、この前日談に要る分だけ写したもの */
+:root{
+  --ink:#2e2115; --ink-2:#4b3624; --desk:#2a1d12;
+  --bg:#d6bd8f; --paper:#e8d4aa; --paper-2:#dcc393; --paper-hi:#f1e2bf;
+  --stamp:#962d1c; --ok:#3d5a2a; --line-soft:#b3935f; --muted:#6e5537; --text-light:#f0e2c2;
+  --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .24 0 0 0 0 .10 0 0 0 .16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --burn:inset 0 0 18px rgba(105,62,18,0.22), inset 0 0 3px rgba(80,45,10,0.25);
+  --type:"Courier New",Courier,monospace;
+  --mincho:"Noto Serif JP","Hiragino Mincho ProN","YuMincho",serif;
+  --gothic:"Noto Sans JP",-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:var(--noise),var(--bg);color:var(--ink);font-family:var(--gothic);font-size:16px;line-height:1.8;-webkit-text-size-adjust:100%;}
+.bar{background:var(--desk);color:var(--text-light);font-family:var(--type);font-size:11px;letter-spacing:.25em;text-align:center;padding:10px 16px;}
+main{max-width:560px;margin:0 auto;padding:28px 16px 56px;}
+.paper{background:var(--noise),var(--paper);box-shadow:var(--burn),0 2px 8px rgba(42,29,18,.18);padding:24px 20px;margin-bottom:20px;}
+.kicker{font-family:var(--type);font-weight:700;font-size:12px;letter-spacing:.3em;color:var(--stamp);margin:0 0 6px;}
+h1{font-family:var(--mincho);font-weight:900;font-size:30px;line-height:1.3;margin:0;}
+.sub{font-family:var(--mincho);font-weight:700;font-size:15px;color:var(--muted);margin:4px 0 0;}
+.title-block{text-align:center;padding:30px 20px 26px;}
+.title-block .chapter{display:inline-block;margin-top:18px;padding:4px 18px;border:2px solid var(--stamp);color:var(--stamp);font-family:var(--mincho);font-weight:900;font-size:18px;letter-spacing:.15em;transform:rotate(-2deg);}
+.story p{margin:0 0 1em;}
+.story p:last-child{margin-bottom:0;}
+.message{background:var(--paper-hi);border:1px solid var(--line-soft);padding:14px 12px 16px;}
+.message-head{display:flex;justify-content:space-between;font-family:var(--type);font-size:11px;color:var(--muted);border-bottom:1px dashed var(--line-soft);padding-bottom:8px;margin-bottom:14px;letter-spacing:.08em;}
+.signs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 14px;}
+.signs svg{display:block;width:100%;height:auto;}
+@media (min-width:520px){.signs{grid-template-columns:repeat(6,1fr);gap:12px;}}
+.answer{margin-top:18px;}
+.answer label{display:block;font-weight:700;font-size:14px;margin-bottom:6px;}
+.answer-row{display:flex;gap:8px;}
+.answer input{flex:1;min-width:0;font:inherit;font-size:20px;letter-spacing:.2em;padding:10px 12px;border:2px solid var(--ink);background:var(--paper-hi);color:var(--ink);border-radius:0;}
+.btn{font:inherit;font-weight:700;padding:10px 18px;border:2px solid var(--ink);background:var(--ink);color:var(--text-light);cursor:pointer;border-radius:0;}
+.btn-ghost{background:transparent;color:var(--ink);width:100%;margin-top:12px;}
+.feedback{min-height:1.6em;margin:8px 0 0;font-weight:700;font-size:14px;}
+.feedback.ng{color:var(--stamp);}
+.hints{margin-top:4px;}
+.hint{background:var(--paper-2);border-left:4px solid var(--ink-2);padding:10px 12px;margin-top:10px;font-size:14px;}
+.hint b{font-family:var(--type);color:var(--muted);margin-right:6px;}
+.solved{display:none;}
+.solved.show{display:block;animation:fade .8s ease both;}
+@keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.decoded{text-align:center;margin:4px 0 18px;}
+.decoded .stamp{display:inline-block;padding:2px 14px;border:2.5px solid var(--stamp);outline:1px solid var(--stamp);outline-offset:3px;color:var(--stamp);font-family:var(--type);font-weight:700;font-size:13px;letter-spacing:.3em;transform:rotate(-4deg);margin-bottom:14px;}
+.decoded .word{font-family:var(--mincho);font-weight:900;font-size:34px;letter-spacing:.12em;line-height:1.3;}
+.decoded .word small{display:block;font-size:18px;letter-spacing:.08em;color:var(--muted);margin-top:4px;}
+.quote{font-family:var(--mincho);font-weight:700;}
+.invite{background:var(--desk);color:var(--text-light);text-align:center;padding:24px 18px;}
+.invite .kicker{color:#d98a6e;}
+.invite .name{font-family:var(--mincho);font-weight:900;font-size:22px;line-height:1.4;margin:6px 0 4px;}
+.invite p{margin:8px 0 0;font-size:14px;}
+footer{text-align:center;font-family:var(--type);font-size:11px;color:var(--muted);letter-spacing:.15em;}
+</style>
+</head>
+<body>
+<div class="bar">MIE UNIV. FESTIVAL / PROLOGUE</div>
+<main>
+  <section class="paper title-block">
+    <p class="kicker">PROLOGUE</p>
+    <h1>消えた恋人の行方</h1>
+    <p class="sub">〜幻想のアマント〜</p>
+    <div class="chapter">前日談　六つのしるし</div>
+  </section>
+
+  <section class="paper story">
+    <p>学園祭の前日。<br>三重大学でひそかに難事件を解決していると噂される「ミエダイ探偵」のもとに、一通のメッセージが届いた。</p>
+    <p>差出人の名前はない。<br>本文も、一文字もない。</p>
+    <p>添えられていたのは、六つの図だけだった。</p>
+  </section>
+
+  <section class="paper">
+    <div class="message">
+      <div class="message-head"><span>FROM: ―――</span><span>本文なし・添付6件</span></div>
+      <div class="signs" id="signs" aria-label="3×4のマス目が6つ。それぞれ1マスだけが赤く、点か矢印の印がある"></div>
+    </div>
+    <form class="answer" id="answer-form" autocomplete="off">
+      <label for="answer">この図が伝えている言葉は？（カタカナ6文字）</label>
+      <div class="answer-row">
+        <input id="answer" type="text" inputmode="text" maxlength="12" placeholder="______">
+        <button class="btn" type="submit">送信</button>
+      </div>
+      <p class="feedback" id="feedback" aria-live="polite"></p>
+    </form>
+    <div class="hints" id="hints"></div>
+    <button class="btn btn-ghost" type="button" id="hint-btn">ヒントを見る (1/3)</button>
+  </section>
+
+  <section class="solved" id="solved">
+    <div class="paper story">
+      <div class="decoded">
+        <div class="stamp">DECODED</div>
+        <div class="word">タスケモトム<small>――助け求む</small></div>
+      </div>
+      <p>声に出せない誰かが、指先だけで助けを求めている。</p>
+      <p>けれど、差出人の手がかりはどこにもない。<br>図をいくら見返しても、それ以上は何もわからなかった。</p>
+      <p>そして翌日、学園祭の当日。<br>ひとりの女性が、探偵のもとを訪ねてくる。</p>
+      <p class="quote">「恋人と、しばらく連絡が取れないんです」</p>
+      <p>――事件は、ここから動き出す。</p>
+    </div>
+    <div class="invite">
+      <p class="kicker">TO BE CONTINUED</p>
+      <p class="name">消えた恋人の行方<br>〜幻想のアマント〜</p>
+      <p>三重大学学園祭 周回型リアル脱出ゲーム<br>本編は学園祭当日、受付でお待ちしています。</p>
+    </div>
+  </section>
+
+  <footer>MIEDAI DETECTIVE FILE / 000</footer>
+</main>
+
+<script>
+(() => {
+  // 3×4のマス目 = スマホの12キー(かな入力)。● はタップ、矢印はフリックの向き
+  // タ=た・タップ / ス=さ・上 / ケ=か・右 / モ=ま・下 / ト=た・下 / ム=ま・上
+  const MOVES = [[0, 1, "tap"], [2, 0, "up"], [1, 0, "right"], [0, 2, "down"], [0, 1, "down"], [0, 2, "up"]];
+  const ANSWERS = ["タスケモトム", "助ケ求ム"];
+  const HINTS = [
+    "3×4に並んだ12のマス。あなたが毎日、指でふれているものかもしれない。",
+    "スマホで文字を打つときの画面（12キーのかな入力）。●は軽くふれる、矢印はその向きに指をすべらせる。",
+    "答え：タスケモトム",
+  ];
+  const KEY = "aescape_prologue_v1"; // 本編(aescape_progress_v1)とは別に保存する
+
+  const CELL = 40, GAP = 9, W = 3 * CELL + 2 * GAP, H = 4 * CELL + 3 * GAP;
+  const chevron = {
+    up: [[-9, 4], [0, -10], [9, 4]], down: [[-9, -4], [0, 10], [9, -4]],
+    left: [[4, -9], [-10, 0], [4, 9]], right: [[-4, -9], [10, 0], [-4, 9]],
+  };
+  const signs = document.getElementById("signs");
+  MOVES.forEach(([mc, mr, mv]) => {
+    let s = `<svg viewBox="-2 -2 ${W + 4} ${H + 4}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">`;
+    for (let r = 0; r < 4; r++) for (let c = 0; c < 3; c++) {
+      const x = c * (CELL + GAP), y = r * (CELL + GAP);
+      if (c === mc && r === mr) {
+        const cx = x + CELL / 2, cy = y + CELL / 2;
+        s += `<rect x="${x}" y="${y}" width="${CELL}" height="${CELL}" rx="7" fill="#962d1c"/>`;
+        s += mv === "tap"
+          ? `<circle cx="${cx}" cy="${cy}" r="7" fill="#f1e2bf"/>`
+          : `<polyline points="${chevron[mv].map(([dx, dy]) => `${cx + dx},${cy + dy}`).join(" ")}" fill="none" stroke="#f1e2bf" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`;
+      } else {
+        s += `<rect x="${x + 1.5}" y="${y + 1.5}" width="${CELL - 3}" height="${CELL - 3}" rx="6" fill="none" stroke="#b3935f" stroke-width="3"/>`;
+      }
+    }
+    signs.insertAdjacentHTML("beforeend", s + "</svg>");
+  });
+
+  // 全角・半角やひらがな/カタカナの違いを吸収して比べる
+  const norm = (t) => t.normalize("NFKC").replace(/\s+/g, "")
+    .replace(/[ぁ-ゖ]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) + 0x60));
+
+  let state = { solved: false, hints: 0 };
+  try { state = Object.assign(state, JSON.parse(localStorage.getItem(KEY)) || {}); } catch (e) {}
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+
+  const hintsEl = document.getElementById("hints"), hintBtn = document.getElementById("hint-btn");
+  const renderHints = () => {
+    hintsEl.innerHTML = "";
+    HINTS.slice(0, state.hints).forEach((h, i) => {
+      const d = document.createElement("div"); d.className = "hint";
+      d.innerHTML = `<b>HINT ${i + 1}</b>`; d.append(h); hintsEl.append(d);
+    });
+    hintBtn.hidden = state.hints >= HINTS.length;
+    hintBtn.textContent = `ヒントを見る (${state.hints + 1}/${HINTS.length})`;
+  };
+  hintBtn.addEventListener("click", () => { state.hints++; save(); renderHints(); });
+
+  const solvedEl = document.getElementById("solved"), fb = document.getElementById("feedback");
+  const showSolved = (scroll) => {
+    solvedEl.classList.add("show");
+    if (scroll) solvedEl.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+  document.getElementById("answer-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const v = norm(document.getElementById("answer").value);
+    if (!v) return;
+    if (ANSWERS.some((a) => norm(a) === v)) {
+      fb.textContent = ""; state.solved = true; save(); showSolved(true);
+    } else {
+      fb.textContent = "……ちがうようだ。図をもう一度見てみよう。"; fb.className = "feedback ng";
+    }
+  });
+
+  renderHints();
+  if (state.solved) showSolved(false);
+})();
+</script>
+</body>
+</html>

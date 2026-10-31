@@ -108,9 +108,9 @@ footer{text-align:center;font-family:var(--type);font-size:11px;color:var(--mute
       <div class="mail-foot">添付ファイル：なし</div>
     </div>
     <form class="answer" id="answer-form" autocomplete="off">
-      <label for="answer">この図が伝えている言葉は？（7文字・ひらがなでもカタカナでもOK）</label>
+      <label for="answer">この図が伝えている言葉は？</label>
       <div class="answer-row">
-        <input id="answer" type="text" inputmode="text" maxlength="14" placeholder="_______">
+        <input id="answer" type="text" inputmode="text" maxlength="14">
         <button class="btn" type="submit">送信</button>
       </div>
       <p class="feedback" id="feedback" aria-live="polite"></p>
@@ -155,7 +155,7 @@ footer{text-align:center;font-family:var(--type);font-size:11px;color:var(--mute
     [0, 1, "tap"], [1, 3, "up", 1], [0, 1, "right", -1], [0, 0, "left", -1],
     [0, 2, "down", -1], [0, 1, "down", -1], [0, 2, "up", -1],
   ];
-  const ANSWERS = ["タンテイモトム", "探偵求ム", "探偵モトム"];
+  const ANSWERS = ["タンテイモトム", "探偵求ム", "探偵モトム", "タンテイ求ム"]; // ひらがな・カタカナ・漢字のどれでも正解(比べる前にひらがなはカタカナにそろえる)
   const HINTS = [
     "3×4に並んだ12のマス。あなたが毎日、指でふれているものかもしれない。",
     "スマホで文字を打つときの画面（12キーのかな入力）。●は軽くふれる、矢印はその向きに指をすべらせる。番号の順に打ってみよう。",
